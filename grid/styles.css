@@ -1,0 +1,55 @@
+body {
+  margin: 0;
+  display: grid;
+  grid-template-rows: repeat(4, 1fr);
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-areas: 
+                      "red red red red"
+                      "orange yellow yellow green"
+                      "blue blue indigo indigo"
+                      "purple purple purple purple";
+}
+
+/* 전체 */
+
+div {
+  height: 200px;
+}
+
+/* 개별 */
+
+#red {
+  grid-area: red;
+  background-color: red;
+}
+
+#orange {
+  grid-area: orange;
+  background-color: orange;
+  
+}
+
+#yellow {
+  grid-area: yellow;
+  background-color: yellow;
+}
+
+#green {
+  grid-area: green;
+  background-color: green;
+}
+
+#blue {
+  grid-area: blue;
+  background-color: blue;
+}
+
+#indigo {
+  grid-area: indigo;
+  background-color: indigo;
+}
+
+#purple {
+  grid-area: purple;
+  background-color: purple;
+}
