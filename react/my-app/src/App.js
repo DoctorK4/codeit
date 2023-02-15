@@ -1,24 +1,41 @@
-import logo from './logo.svg';
 import './App.css';
 
+function Header(props){
+  
+  return <header>
+    <h1><a href="/">{ props.title }</a></h1>
+  </header>
+}
+
+function Nav(props){
+  const lis = [
+    <li><a href="/read/1">html</a></li>,
+    <li><a href="/read/2">css</a></li>,
+    <li><a href="/read/3">Javascript</a></li>
+  ]
+
+  for (let i =0; i<props.topics.length;i++){
+    let t = props.topics[i];
+    lis.push(<li key={t.id}><a href={'/read/'+t.id}>{t.title}</a></li>)
+  }
+
+  return <nav>
+    <ol>
+      {lis}
+    </ol>
+  </nav>
+}
+
 function App() {
+  const topics = [
+    {id : 1, title : 'html', body : 'html is...'},
+    {id : 2, title : 'CSS', body : 'CSS is...'},
+    {id : 3, title : 'Javascript', body : 'Javascript is...'}
+  ]
   return (
-    <div className="App">
-      <header className="App-header">
-        <h1> Hello React! </h1>
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+     <Header title="REACT"></Header>
+     <Nav topics={topics}></Nav>
     </div>
   );
 }
