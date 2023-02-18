@@ -7,31 +7,23 @@
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <script type="text/babel">
       const root = document.getElementById('root');
-      let counter = 0;
-      function countUp (){
-        counter += 1;
-        render(); 
-      }
 
-      function render(){
-        ReactDOM.createRoot(root).render(<Container/>);
-      }
-      // const span = React.createElement("h3", {
-        //   onMouseEnter: () => console.log('mouse enter'), id:"title"
-      // }, "Hello I'm a span");
+      function App(){
+        // const data = React.useState(0);
+        const [counter, setCounter] = React.useState(0);
+        
+        function onClick(){
+          setCounter((current) => current + 1);
+        }
 
-      // const btn = React.createElement("button", {
-      //   onClick: ()=> console.log('I am clicked'), style:{backgroundColor:"tomato"}
-      // },'Click me');
-      
-      const Container =() => ( 
-       <div>
-        <h3 id="title">Total clicks: {counter}</h3>
-        <button onClick={countUp} >'Click me'</button>
-      </div>);
+        return ( 
+          <div>
+            <h3 id="title">Total clicks: {counter}</h3>
+            <button onClick={onClick}>'Click me'</button>
+          </div>
+      )};
 
-      // const container = React.createElement("div", null, [Title, Button]);
-      ReactDOM.createRoot(root).render(<Container/>);
+      ReactDOM.createRoot(root).render(<App/>);
     </script>
   </body>
 </html> 
