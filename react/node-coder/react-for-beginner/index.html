@@ -49,9 +49,53 @@
           </div>
       )};
       function KmToMiles(){
+
+        const onChange = (e) => {
+          setAmount(e.target.value);
+        }
+
+        const convertUnit = () => {
+          reset();
+          setUnit(!unit);
+        };
+
+        const reset = () => {
+          setAmount(0);
+        };
+
+        const [amount, setAmount] = React.useState("0");
+        const [unit, setUnit] = React.useState(false);
+
         return (
-          <h3> KM 2 M </h3>
-      )};
+          <React.Fragment>
+          <h3> KM to Miles </h3>
+          
+          <label htmlFor="kilo">Kilometer</label>
+          <input 
+            disabled={unit} 
+            onChange={onChange} 
+            value={unit ? amount*1.60934 : amount}
+            id="kilo"
+            placeholder="0" 
+            type="number"
+          />
+          
+          <label htmlFor="mile">Mile</label>
+          <input 
+            disabled={!unit} 
+            onChange={onChange} 
+            value={unit ? amount : amount*0.621371}
+            id="mile" 
+            placeholder="0" 
+            type="number"
+          />
+
+          <button onClick={convertUnit}>change</button>
+          <button onClick={reset}>reset</button>
+          </React.Fragment>
+        )
+      };
+
       function App(){
         const [ index, setIndex ] = React.useState("0");
         const onSelect = (event) => {
@@ -68,7 +112,8 @@
             {index === "0" ? <MinutesToHours /> : null}
             {index === "1" ? <KmToMiles/> : null }
           </div>
-      )};
+        )
+      };
 
       ReactDOM.createRoot(root).render(<App/>);
     </script>
