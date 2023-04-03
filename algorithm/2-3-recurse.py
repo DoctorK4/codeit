@@ -1,14 +1,15 @@
 # n의 각 자릿수의 합을 리턴
 def sum_digits(n):
-  length_n = int(len(str(n)))
+    length_n = len(str(n))
     
-  if n-1 < 0 :
-    return 
+    if length_n-1 == 0 :
+        return n
     
-  else : 
-    digit = n / (10 ** (length_n - 1))
-    total_digit = digit + sum_digits(n - (digit * (10 ** (length_n - 1))))
-    return total_digit
+    else : 
+        digit = n // (10 ** (length_n-1))
+        next_digit = n - (digit * (10 ** (length_n-1)))
+        total = digit + sum_digits(next_digit)
+        return total
 
 # 테스트 코드
 print(sum_digits(22541))
