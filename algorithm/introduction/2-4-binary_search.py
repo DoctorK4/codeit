@@ -3,7 +3,7 @@ def binary_search(element, some_list):
     end_index = len(some_list) - 1
     # 반복문
 
-    while start_index < end_index :
+    while start_index <= end_index :
         mid_point = (start_index + end_index ) // 2
         
         # 중간값과 같은 경우
