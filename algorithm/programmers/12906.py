@@ -8,3 +8,12 @@ def solution(arr):
     return answer
 
 # 핵심 로직 : 이전 값과 다른 값일 경우, 정답배열에 추가한다. 
+# 간소화한 다른 풀이
+# def solution(arr):
+#     answer = []
+#     prev = -1
+#     for item in arr:
+#         if prev != item:
+#             answer.append(item)
+#             prev = item
+#     return answer
