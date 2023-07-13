@@ -12,7 +12,7 @@ def max_profit_memo(price_list, count, cache):
 
     if count < len(price_list):
         temp_list.append(price_list[count])
-
+    
     for i in range(1, count // 2 + 1):
         profit = max_profit_memo(price_list, i, cache) + max_profit_memo(price_list, count-i, cache)
         temp_list.append(profit)
