@@ -35,6 +35,7 @@ def solution(progresses, speeds):
         time = math.ceil((100 - progresses[i]) / speeds[i])
         times.append(time)
 
+    # 기본 1에서 출발하여, 다음으로 오는 자신보다 큰 값을 찾을 때까지 1씩 증가시켜줌
     while times:
         left = times.popleft()
         result = 1
