@@ -41,3 +41,7 @@
   font-weight: 400;
   font-size: 16px;
 }
+
+:global(.light) .starRating {
+  color: #1f1f1f;
+}
