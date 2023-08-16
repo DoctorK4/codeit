@@ -26,21 +26,20 @@ export default function Movie() {
     setMovie(response.data);
   };
 
-  const getMovieReviews = async () => {
-    const response = await axios.get(`/movie_reviews`);
-    setMovieReviews(response.data.results);
+  const getMovieReviews = async (id) => {
+    const response = await axios.get(`/movie_reviews/?movie_id=${id}`);
+    const reviewData = response.data.results;
+    if (reviewData == undefined) setMovieReviews([]);
+    setMovieReviews(reviewData);
   };
 
   useEffect(() => {
     if (!id) return;
     getMovie(id);
+    getMovieReviews(id);
   }, [id]);
 
-  useEffect(() => {
-    getMovieReviews();
-  }, []);
-
-  if (!movie | !movieReviews) return null;
+  if (!movie) return null;
 
   return (
     <>
