@@ -1,14 +1,25 @@
+import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import MovieList from "@/components/MovieList";
 import SearchForm from "@/components/SearchForm";
 import styles from "@/styles/Search.module.css";
 import Header from "@/components/Header";
 import Container from "@/components/Container";
+import axios from "@/lib/axios";
 
 export default function Search() {
   const router = useRouter();
   const q = router.query["q"];
-  const movies = mock.movies; // 이 코드를 지우고 API를 연동해 주세요
+  const [queryMovies, setQueryMovies] = useState();
+  const getMovies = async (q) => {
+    const response = await axios.get(`/movies?q=${q}`);
+    await setQueryMovies(response.data.results);
+  };
+
+  useEffect(() => {
+    if (!q) return;
+    getMovies(q);
+  }, [q]);
 
   return (
     <>
@@ -18,7 +29,7 @@ export default function Search() {
         <h2 className={styles.title}>
           <span className={styles.keyword}>{q}</span> 검색 결과
         </h2>
-        <MovieList movies={movies} />
+        <MovieList movies={queryMovies} />
       </Container>
     </>
   );

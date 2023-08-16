@@ -1,20 +1,32 @@
-import MovieList from "@/components/MovieList";
-import SearchForm from "@/components/SearchForm";
-import styles from "@/styles/Home.module.css";
-import Header from "@/components/Header";
-import Container from "@/components/Container";
-import mock from "@/mock.json"; // 이 코드를 지우고 API를 연동해 주세요
+import Link from "next/link";
+import styles from "./MovieList.module.css";
+import StarRating from "./StarRating";
 
-export default function Home() {
-  const movies = mock.movies; // 이 코드를 지우고 API를 연동해 주세요
-
+export default function MovieList({ className = "", movies }) {
   return (
-    <>
-      <Header />
-      <Container page>
-        <SearchForm />
-        <MovieList className={styles.movieList} movies={movies} />
-      </Container>
-    </>
+    <ul className={`${styles.movieList} ${className}`}>
+      {movies &&
+        movies.map((movie) => (
+          <li key={movie.id}>
+            <Link href={`/movies/${movie.id}`}>
+              <img
+                className={styles.poster}
+                src={movie.posterUrl}
+                alt={movie.title}
+              />
+            </Link>
+            <div className={styles.info}>
+              <h2 className={styles.title}>{movie.title}</h2>
+              <div className={styles.date}>
+                {movie.date} ・ {movie.country}
+              </div>
+              <div className={styles.starRatingContainer}>
+                <StarRating value={movie.starRating} />
+                <span className={styles.starRating}>{movie.starRating}</span>
+              </div>
+            </div>
+          </li>
+        ))}
+    </ul>
   );
 }
