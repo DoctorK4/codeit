@@ -45,3 +45,12 @@
 :global(.light) .starRating {
   color: #1f1f1f;
 }
+
+.posterContainer {
+  display: block;
+  border-radius: 10px;
+  aspect-ratio: 27 / 40;
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
