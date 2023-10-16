@@ -5,9 +5,16 @@ import Card from '../components/Card';
 import CourseIcon from '../components/CourseIcon';
 import getCourseColor from '../utils/getCourseColor';
 import styles from './CoursePage.module.css';
+import { Navigate, useParams } from 'react-router-dom';
 
 function CoursePage() {
-  const course = getCourseBySlug('react-frontend-development');
+  const { courseSlug } = useParams();
+  const course = getCourseBySlug(courseSlug);
+
+  if (!course) {
+    return <Navigate to="/courses" />
+  }
+
   const courseColor = getCourseColor(course?.code);
 
   const headerStyle = {
