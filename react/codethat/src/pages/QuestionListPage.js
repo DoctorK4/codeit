@@ -1,14 +1,14 @@
-import { useState } from 'react';
-import { getQuestions } from '../api';
-import DateText from '../components/DateText';
-import ListPage from '../components/ListPage';
-import Warn from '../components/Warn';
-import Card from '../components/Card';
-import Avatar from '../components/Avatar';
-import styles from './QuestionListPage.module.css';
-import searchBarStyles from '../components/SearchBar.module.css';
-import searchIcon from '../assets/search.svg';
-import { Link } from 'react-router-dom';
+import { useState } from "react";
+import { getQuestions } from "../api";
+import DateText from "../components/DateText";
+import ListPage from "../components/ListPage";
+import Warn from "../components/Warn";
+import Card from "../components/Card";
+import Avatar from "../components/Avatar";
+import styles from "./QuestionListPage.module.css";
+import searchBarStyles from "../components/SearchBar.module.css";
+import searchIcon from "../assets/search.svg";
+import { Link, useSearchParams } from "react-router-dom";
 
 function QuestionItem({ question }) {
   return (
@@ -35,10 +35,22 @@ function QuestionItem({ question }) {
 }
 
 function QuestionListPage() {
-  const [keyword, setKeyword] = useState('');
-  const questions = getQuestions();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const initKeyword = searchParams.get("keyword");
+  const [keyword, setKeyword] = useState(initKeyword || "");
+  const questions = getQuestions(initKeyword);
 
   const handleKeywordChange = (e) => setKeyword(e.target.value);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setSearchParams(
+      keyword
+        ? {
+            keyword,
+          }
+        : {}
+    );
+  };
 
   return (
     <ListPage
@@ -46,7 +58,7 @@ function QuestionListPage() {
       title="커뮤니티"
       description="코드댓의 2만 수강생들과 함께 공부해봐요."
     >
-      <form className={searchBarStyles.form}>
+      <form className={searchBarStyles.form} onSubmit={handleSubmit}>
         <input
           name="keyword"
           value={keyword}
@@ -60,7 +72,7 @@ function QuestionListPage() {
 
       <p className={styles.count}>총 {questions.length}개 질문</p>
 
-      {questions.length === 0 ? (
+      {keyword && questions.length === 0 ? (
         <Warn
           className={styles.emptyList}
           title="조건에 맞는 질문이 없어요."
